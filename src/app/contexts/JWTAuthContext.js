@@ -127,6 +127,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setSession(null);
+    toast.success("Logout Successfully");
     dispatch({ type: 'LOGOUT' });
   };
 
@@ -137,7 +138,7 @@ export const AuthProvider = ({ children }) => {
 
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
-          const response = await axios.get('/api/auth/profile');
+          const response = await axios.get('http://server.appsstaging.com:3055/api/getUser');
           const { user } = response.data;
 
           dispatch({

@@ -56,19 +56,30 @@ const JwtRegister = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const handleFormSubmit = (values) => {
-    setLoading(true);
+  // const handleFormSubmit = (values) => {
+  //   setLoading(true);
 
+  //   try {
+  //     register(values.email, values.password, values.role);
+  //     // navigate('/session/signin');
+  //     setLoading(false);
+  //     console.log(values.email, values.password)
+  //   } catch(e) {
+  //     console.log(e.message);
+  //     toast.error(e.message);
+  //     setLoading(false);
+  //     window.alert(e.message);
+  //   }
+  // };
+
+  const handleFormSubmit = async (values) => {
+    setLoading(true);
     try {
-      register(values.email, values.password, values.role);
-      // navigate('/session/signin');
-      setLoading(false);
-      console.log(values.email, values.password)
+      await register(values.email, values.password, values.role);
+      navigate('/session/signin');
     } catch (e) {
-      console.log(e.message);
-      toast.error(e.message);
       setLoading(false);
-      window.alert(e.message);
+      toast.error(e.message)
     }
   };
 
