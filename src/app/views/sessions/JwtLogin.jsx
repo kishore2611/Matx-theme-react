@@ -7,6 +7,8 @@ import { Formik } from 'formik';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FlexBox = styled(Box)(() => ({ display: 'flex', alignItems: 'center' }));
 
@@ -20,7 +22,7 @@ const ContentBox = styled(Box)(() => ({
 }));
 
 const JWTRoot = styled(JustifyBox)(() => ({
-  background: '#1A2038',
+  background: 'linear-gradient(360deg, #abc8ed, #3d4294, #17053d)',
   minHeight: '100% !important',
   '& .card': {
     maxWidth: 800,
@@ -34,8 +36,8 @@ const JWTRoot = styled(JustifyBox)(() => ({
 
 // inital login credentials
 const initialValues = {
-  email: 'jason@ui-lib.com',
-  password: 'dummyPass',
+  email: 'Admin@gmail.com',
+  password: 'Admin',
   remember: true,
 };
 
@@ -61,6 +63,7 @@ const JwtLogin = () => {
       navigate('/');
     } catch (e) {
       setLoading(false);
+      toast.error(e.message)
     }
   };
 
@@ -70,7 +73,7 @@ const JwtLogin = () => {
         <Grid container>
           <Grid item sm={6} xs={12}>
             <JustifyBox p={4} height="100%" sx={{ minWidth: 320 }}>
-              <img src="/assets/images/illustrations/dreamer.svg" width="100%" alt="" />
+              <img src="/assets/images/illustrations/login.jpg" width="100%" alt="" />
             </JustifyBox>
           </Grid>
 
@@ -136,7 +139,8 @@ const JwtLogin = () => {
 
                     <LoadingButton
                       type="submit"
-                      color="primary"
+                      // color="primary"
+                      style={{backgroundColor: "#3d4294", width: "100%"}}
                       loading={loading}
                       variant="contained"
                       sx={{ my: 2 }}

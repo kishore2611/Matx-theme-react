@@ -8,6 +8,8 @@ import { Formik } from 'formik';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FlexBox = styled(Box)(() => ({ display: 'flex', alignItems: 'center' }));
 
@@ -20,7 +22,7 @@ const ContentBox = styled(JustifyBox)(() => ({
 }));
 
 const JWTRegister = styled(JustifyBox)(() => ({
-  background: '#1A2038',
+  background: 'linear-gradient(360deg, #abc8ed, #3d4294, #17053d)',
   minHeight: '100vh !important',
   '& .card': {
     maxWidth: 800,
@@ -36,7 +38,7 @@ const JWTRegister = styled(JustifyBox)(() => ({
 const initialValues = {
   email: '',
   password: '',
-  username: '',
+  role: '',
   remember: true,
 };
 
@@ -58,12 +60,15 @@ const JwtRegister = () => {
     setLoading(true);
 
     try {
-      register(values.email, values.username, values.password);
-      navigate('/');
+      register(values.email, values.password, values.role);
+      // navigate('/session/signin');
       setLoading(false);
+      console.log(values.email, values.password)
     } catch (e) {
-      console.log(e);
+      console.log(e.message);
+      toast.error(e.message);
       setLoading(false);
+      window.alert(e.message);
     }
   };
 
@@ -76,7 +81,7 @@ const JwtRegister = () => {
               <img
                 width="100%"
                 alt="Register"
-                src="/assets/images/illustrations/posting_photo.svg"
+                src="/assets/images/illustrations/registration.jpg"
               />
             </ContentBox>
           </Grid>
@@ -94,14 +99,14 @@ const JwtRegister = () => {
                       fullWidth
                       size="small"
                       type="text"
-                      name="username"
-                      label="Username"
+                      name="role"
+                      label="role"
                       variant="outlined"
                       onBlur={handleBlur}
-                      value={values.username}
+                      value={values.role}
                       onChange={handleChange}
-                      helperText={touched.username && errors.username}
-                      error={Boolean(errors.username && touched.username)}
+                      helperText={touched.role && errors.role}
+                      error={Boolean(errors.role && touched.role)}
                       sx={{ mb: 3 }}
                     />
 
@@ -150,7 +155,8 @@ const JwtRegister = () => {
 
                     <LoadingButton
                       type="submit"
-                      color="primary"
+                      // color="primary"
+                      style={{ backgroundColor: '#3d4294', width: '100%' }}
                       loading={loading}
                       variant="contained"
                       sx={{ mb: 2, mt: 3 }}

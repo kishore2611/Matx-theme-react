@@ -17,7 +17,7 @@ const ContentBox = styled(Box)(({ theme }) => ({
 }));
 
 const ForgotPasswordRoot = styled(JustifyBox)(() => ({
-  background: '#1A2038',
+  background: 'linear-gradient(360deg, #abc8ed, #3d4294, #17053d)',
   minHeight: '100vh !important',
   '& .card': {
     maxWidth: 800,
@@ -40,7 +40,7 @@ const ForgotPassword = () => {
         <Grid container>
           <Grid item xs={12}>
             <JustifyBox p={4}>
-              <img width="300" src="/assets/images/illustrations/dreamer.svg" alt="" />
+              <img width="300" src="/assets/images/illustrations/forgetpassword.jpg" alt="" />
             </JustifyBox>
 
             <ContentBox>
@@ -56,13 +56,14 @@ const ForgotPassword = () => {
                   sx={{ mb: 3, width: '100%' }}
                 />
 
-                <Button fullWidth variant="contained" color="primary" type="submit">
+                <Button fullWidth variant="contained" style={{backgroundColor: "#3d4294", width: "100%"}} type="submit">
                   Reset Password
                 </Button>
 
                 <Button
                   fullWidth
-                  color="primary"
+                  // color="primary"
+                  style={{color: "#3d4294", borderColor: "#3d4294"}}
                   variant="outlined"
                   onClick={() => navigate(-1)}
                   sx={{ mt: 2 }}
