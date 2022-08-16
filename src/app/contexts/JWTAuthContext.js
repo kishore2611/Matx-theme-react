@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useReducer } from 'react';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios.js';
 import { MatxLoading } from 'app/components';
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const initialState = {
@@ -90,8 +90,11 @@ export const AuthProvider = ({ children }) => {
       email,
       password,
     });
-    toast.success(response.data.message)
-    const { accessToken, user } = response.data;
+    // console.log(response);
+    toast.success(response.data.message);
+    const  accessToken  = response.data.token;
+    const  user  = response.data;
+    console.log(user, accessToken);
 
     setSession(accessToken);
 
@@ -109,8 +112,8 @@ export const AuthProvider = ({ children }) => {
       password,
       role,
     });
-    console.log(response.data)
-    toast.success(response.data.message)
+    console.log(response.data);
+    toast.success(response.data.message);
     // console.log(response.data);
     const { accessToken, user } = response.data;
     // window.alert(response.data.message);
@@ -127,20 +130,20 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setSession(null);
-    toast.success("Logout Successfully");
+    toast.success('Logout Successfully');
     dispatch({ type: 'LOGOUT' });
   };
 
   useEffect(() => {
     (async () => {
       try {
-        const accessToken = window.localStorage.getItem('accessToken');
+        const accessToken = (localStorage.getItem('accessToken'));
+        console.log('response', accessToken);
 
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
           const response = await axios.get('http://server.appsstaging.com:3055/api/getUser');
-          const { user } = response.data;
-
+          const  user  = response.data;
           dispatch({
             type: 'INIT',
             payload: {

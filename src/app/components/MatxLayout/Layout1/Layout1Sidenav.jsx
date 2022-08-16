@@ -22,7 +22,7 @@ const SidebarNavRoot = styled(Box)(({ theme, width, primaryBg, bgImgURL }) => ({
   overflow: 'hidden',
   color: theme.palette.text.primary,
   transition: 'all 250ms ease-in-out',
-  backgroundImage: `linear-gradient(to bottom, rgba(${primaryBg}, 0.96), rgba(${primaryBg}, 0.96)), url(${bgImgURL})`,
+  backgroundImage: 'linear-gradient(500deg, #abc8ed, #3d4294, #17053d)',
   '&:hover': {
     width: sideNavWidth,
     '& .sidenavHoverShow': {
@@ -78,7 +78,7 @@ const Layout1Sidenav = () => {
   };
 
   return (
-    <SidebarNavRoot bgImgURL={bgImgURL} primaryBg={primaryRGB} width={getSidenavWidth()}>
+    <SidebarNavRoot width={getSidenavWidth()}>
       <NavListBox>
         <Brand>
           <Hidden smDown>

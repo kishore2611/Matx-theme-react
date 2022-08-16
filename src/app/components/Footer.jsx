@@ -6,6 +6,7 @@ import { Paragraph, Span } from './Typography';
 
 const AppFooter = styled(Toolbar)(() => ({
   display: 'flex',
+  background: 'linear-gradient(150deg, #abc8ed, #3d4294, #17053d)',
   alignItems: 'center',
   minHeight: topBarHeight,
   '@media (max-width: 499px)': {
@@ -40,14 +41,14 @@ const Footer = () => {
       <AppBar color="primary" position="static" sx={{ zIndex: 96 }}>
         <AppFooter>
           <FooterContent>
-            <a href="https://ui-lib.com/downloads/matx-pro-react-admin/">
+            <a href="">
               <Button variant="contained" color="secondary">
-                Get MatX Pro
+                Royality Nurse
               </Button>
             </a>
             <Span sx={{ m: 'auto' }}></Span>
             <Paragraph sx={{ m: 0 }}>
-              Design and Developed by <a href="http://ui-lib.com">UI Lib</a>
+              Design and Developed by <a href="">Binate Digital</a>
             </Paragraph>
           </FooterContent>
         </AppFooter>
