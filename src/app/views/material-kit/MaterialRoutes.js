@@ -15,6 +15,7 @@ const AppDialog = Loadable(lazy(() => import('./dialog/AppDialog')));
 const AppSnackbar = Loadable(lazy(() => import('./snackbar/AppSnackbar')));
 const AppAutoComplete = Loadable(lazy(() => import('./auto-complete/AppAutoComplete')));
 const AppExpansionPanel = Loadable(lazy(() => import('./expansion-panel/AppExpansionPanel')));
+// const Users = Loadable(lazy(() => import('../../adminComponents/Users')));
 
 const materialRoutes = [
   {
@@ -73,6 +74,10 @@ const materialRoutes = [
     path: '/material/snackbar',
     element: <AppSnackbar />,
   },
+  // {
+  //   path: '/material/Users',
+  //   element: <Users />,
+  // },
 ];
 
 export default materialRoutes;

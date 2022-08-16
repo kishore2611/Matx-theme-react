@@ -130,10 +130,11 @@ const Layout1Topbar = () => {
               <UserMenu>
                 <Hidden xsDown>
                   <Span>
-                    Hi<strong>{user.name}</strong>
+                    Hi, <strong>{user.data.name}</strong>
                   </Span>
                 </Hidden>
-                <Avatar src={user.profilePicture} sx={{ cursor: 'pointer' }} />
+                {/* <Avatar src={user.data.profilePicture} sx={{ cursor: 'pointer' }} /> */}
+                <Avatar src={`http://server.appsstaging.com:3055/${user.data.profilePicture}`} sx={{ cursor: 'pointer' }} />
               </UserMenu>
             }
           >

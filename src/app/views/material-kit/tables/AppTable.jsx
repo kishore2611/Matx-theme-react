@@ -23,9 +23,9 @@ const AppTable = () => {
         <SimpleTable />
       </SimpleCard>
 
-      <SimpleCard title="Pagination Table">
-        <PaginationTable />
-      </SimpleCard>
+    <SimpleCard title="Pagination Table">
+      <PaginationTable />
+    </SimpleCard>
     </Container>
   );
 };

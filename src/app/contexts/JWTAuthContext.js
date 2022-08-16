@@ -45,6 +45,7 @@ const reducer = (state, action) => {
     }
     case 'LOGIN': {
       const { user } = action.payload;
+      console.log("reducer", user)
 
       return {
         ...state,
@@ -94,7 +95,7 @@ export const AuthProvider = ({ children }) => {
     toast.success(response.data.message);
     const  accessToken  = response.data.token;
     const  user  = response.data;
-    console.log(user, accessToken);
+    // console.log(user, accessToken);
 
     setSession(accessToken);
 
@@ -112,10 +113,11 @@ export const AuthProvider = ({ children }) => {
       password,
       role,
     });
-    console.log(response.data);
+    // console.log(response.data);
     toast.success(response.data.message);
     // console.log(response.data);
-    const { accessToken, user } = response.data;
+    const accessToken = response.data.token
+    const user = response.data;
     // window.alert(response.data.message);
 
     setSession(accessToken);
@@ -138,12 +140,13 @@ export const AuthProvider = ({ children }) => {
     (async () => {
       try {
         const accessToken = (localStorage.getItem('accessToken'));
-        console.log('response', accessToken);
+        // console.log('response', accessToken);
 
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
           const response = await axios.get('http://server.appsstaging.com:3055/api/getUser');
           const  user  = response.data;
+          // console.log(user, "user", accessToken, "token");
           dispatch({
             type: 'INIT',
             payload: {
@@ -161,7 +164,7 @@ export const AuthProvider = ({ children }) => {
           });
         }
       } catch (err) {
-        console.error(err);
+        // console.error(err);
         dispatch({
           type: 'INIT',
           payload: {

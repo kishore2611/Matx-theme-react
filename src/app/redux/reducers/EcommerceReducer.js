@@ -1,6 +1,8 @@
 import {
   ADD_PRODUCT_TO_CART,
   DELETE_PRODUCT_FROM_CART,
+  GET_ALL_SHIFTS,
+  GET_ALL_USERS,
   GET_BRAND_LIST,
   GET_CART_LIST,
   GET_CATEGORY_LIST,
@@ -12,6 +14,8 @@ import {
 const initialState = {
   productList: [],
   cartList: [],
+  userList: [],
+  shiftList: [],
 };
 
 const EcommerceReducer = function (state = initialState, action) {
@@ -62,6 +66,18 @@ const EcommerceReducer = function (state = initialState, action) {
       return {
         ...state,
         cartList: [...action.payload],
+      };
+    }
+    case GET_ALL_USERS: {
+      return {
+        ...state,
+        userList: [...action.payload],
+      };
+    }
+    case GET_ALL_SHIFTS: {
+      return {
+        ...state,
+        shiftList: [...action.payload],
       };
     }
     default: {

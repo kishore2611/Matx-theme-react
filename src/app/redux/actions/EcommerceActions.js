@@ -10,6 +10,8 @@ export const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
 export const DELETE_PRODUCT_FROM_CART = 'DELETE_PRODUCT_FROM_CART';
 
 export const UPDATE_CART_AMOUNT = 'UPDATE_CART_AMOUNT';
+export const GET_ALL_USERS = 'GET_ALL_USERS';
+export const GET_ALL_SHIFTS = 'GET_ALL_SHIFTS';
 
 export const getProductList = () => (dispatch) => {
   axios.get('/api/ecommerce/get-product-list').then((res) => {
@@ -83,4 +85,34 @@ export const updateCartAmount = (uid, productId, amount) => (dispatch) => {
       payload: res.data,
     });
   });
+};
+
+export const getAllUsers = () => (dispatch) => {
+  // console.log(uid, productId, amount);
+  axios.get('http://server.appsstaging.com:3055/api/getAllUsers').then((res) => {
+    // console.log("sss",res.data)
+    dispatch({
+      type: GET_ALL_USERS,
+      payload: res.data.users,
+    });
+  });
+};
+
+export const getShifts = () => (dispatch) => {
+  // console.log(uid, productId, amount);
+
+  const accessToken = window.localStorage.getItem('accessToken');
+  if (accessToken) {
+    const config = {
+      headers: { Authorization: 'Bearer ' + accessToken },
+    };
+
+    axios.get('http://server.appsstaging.com:3055/api/getShifts', config).then((res) => {
+      // console.log('sss', res.data.allshifts);
+      dispatch({
+        type: GET_ALL_SHIFTS,
+        payload: res.data.allshifts,
+      });
+    });
+  }
 };
