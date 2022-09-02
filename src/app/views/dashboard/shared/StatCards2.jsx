@@ -1,4 +1,7 @@
 import { Card, Fab, Grid, Icon, lighten, styled, useTheme } from '@mui/material';
+import { getAllUsers, getShifts } from 'app/redux/actions/EcommerceActions';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ContentBox = styled('div')(() => ({
   display: 'flex',
@@ -46,6 +49,20 @@ const StatCards2 = () => {
   const { palette } = useTheme();
   const textError = palette.error.main;
   const bgError = lighten(palette.error.main, 0.85);
+  const dispatch = useDispatch();
+  const { userList, shiftList } = useSelector((state) => state.ecommerce);
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, []);
+
+  useEffect(() => {
+    dispatch(getShifts());
+  }, []);
+
+  // const verified = 
+
+  // console.log(shiftList);
 
   return (
     <Grid container spacing={3} sx={{ mb: 3 }}>
@@ -59,11 +76,11 @@ const StatCards2 = () => {
           </ContentBox>
 
           <ContentBox sx={{ pt: 2 }}>
-            <H1>10.8k</H1>
+            <H1>{userList?.length}</H1>
             <IconBox sx={{ background: 'rgba(9, 182, 109, 0.15)' }}>
               <Icon className="icon">expand_less</Icon>
             </IconBox>
-            <Span textcolor={'#08ad6c'}>(+21%)</Span>
+            <Span textcolor={'#08ad6c'}>{userList?.length}</Span>
           </ContentBox>
         </Card>
       </Grid>
@@ -71,18 +88,18 @@ const StatCards2 = () => {
       <Grid item xs={12} md={6}>
         <Card elevation={3} sx={{ p: 2 }}>
           <ContentBox>
-            <FabIcon size="medium" sx={{ background: bgError, overflow: 'hidden' }}>
-              <Icon sx={{ color: textError }}>star_outline</Icon>
+            <FabIcon size="medium" sx={{ background: 'rgba(9, 182, 109, 0.15)', overflow: 'hidden' }}>
+              <Icon sx={{ color: '#08ad6c' }}>star_outline</Icon>
             </FabIcon>
-            <H3 textcolor={textError}>Transactions</H3>
+            <H3 textcolor={'#08ad6c'}>Shifts</H3>
           </ContentBox>
 
           <ContentBox sx={{ pt: 2 }}>
-            <H1>$2.8M</H1>
-            <IconBox sx={{ background: bgError }}>
+            <H1>{shiftList?.length}</H1>
+            <IconBox sx={{ background: 'rgba(9, 182, 109, 0.15)' }}>
               <Icon className="icon">expand_less</Icon>
             </IconBox>
-            <Span textcolor={textError}>(+21%)</Span>
+            <Span textcolor={'#08ad6c'}>{shiftList?.length}</Span>
           </ContentBox>
         </Card>
       </Grid>

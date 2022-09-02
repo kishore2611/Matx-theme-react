@@ -8,6 +8,7 @@ import {
   GET_CATEGORY_LIST,
   GET_PRODUCT_LIST,
   GET_RATING_LIST,
+  POST_SHIFTS,
   UPDATE_CART_AMOUNT,
 } from '../actions/EcommerceActions';
 
@@ -16,6 +17,7 @@ const initialState = {
   cartList: [],
   userList: [],
   shiftList: [],
+  message: '',
 };
 
 const EcommerceReducer = function (state = initialState, action) {
@@ -78,6 +80,18 @@ const EcommerceReducer = function (state = initialState, action) {
       return {
         ...state,
         shiftList: [...action.payload],
+      };
+    }
+    case POST_SHIFTS: {
+      return {
+        ...state,
+        addShift: [...action.payload],
+      };
+    }
+    case 'MESSAGE': {
+      return {
+        ...state,
+        message: action.payload,
       };
     }
     default: {

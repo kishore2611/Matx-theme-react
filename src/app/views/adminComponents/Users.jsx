@@ -36,33 +36,33 @@ const Container = styled('div')(({ theme }) => ({
 }));
 
 const PaginationTable = () => {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  // const [page, setPage] = useState(0);
+  // const [rowsPerPage, setRowsPerPage] = useState(5);
   const dispatch = useDispatch();
   const { userList } = useSelector((state) => state.ecommerce);
-  const { shiftList } = useSelector((state) => state.ecommerce);
 
 //   console.log('users================', userList);
 
-  const handleChangePage = (_, newPage) => {
-    setPage(newPage);
-  };
+  // const handleChangePage = (_, newPage) => {
+  //   setPage(newPage);
+  // };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  // const handleChangeRowsPerPage = (event) => {
+  //   setRowsPerPage(+event.target.value);
+  //   setPage(0);
+  // };
 
   useEffect(() => {
     dispatch(getAllUsers());
   }, []);
-  useEffect(() => {
-    dispatch(getShifts());
-  }, []);
-
+  // useEffect(() => {
+  //   dispatch(getShifts());
+  // }, []);
+  // console.log("userlist",`count={userList.length}`);
   return (
     <Container>
       <SimpleCard title="Users">
+        <p className="display-inline">Total Users '{userList.length}'</p>
         <Box width="100%" overflow="auto">
           <StyledTable>
             <TableHead>
@@ -78,9 +78,9 @@ const PaginationTable = () => {
             </TableHead>
             <TableBody>
               {userList
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((subscriber, index) => (
-                  <TableRow key={index}>
+                  <TableRow key={index} >
                     <TableCell align="left">{subscriber?.name ? subscriber.name : "NA"}</TableCell>
                     <TableCell align="center">{subscriber?.email ? subscriber.email : "NA"}</TableCell>
                     <TableCell align="center">{subscriber?.createdAt ? subscriber.createdAt : "NA"}</TableCell>
@@ -99,7 +99,7 @@ const PaginationTable = () => {
             </TableBody>
           </StyledTable>
 
-          <TablePagination
+          {/* <TablePagination
             sx={{ px: 2 }}
             page={page}
             component="div"
@@ -110,58 +110,7 @@ const PaginationTable = () => {
             onRowsPerPageChange={handleChangeRowsPerPage}
             nextIconButtonProps={{ 'aria-label': 'Next Page' }}
             backIconButtonProps={{ 'aria-label': 'Previous Page' }}
-          />
-        </Box>
-      </SimpleCard>
-      <SimpleCard title="Shifts">
-        <Box width="100%" overflow="auto">
-          <StyledTable>
-            <TableHead>
-              <TableRow>
-                <TableCell align="left">Hospital Name</TableCell>
-                <TableCell align="center">Job Title</TableCell>
-                <TableCell align="center">Timing</TableCell>
-                <TableCell align="center">Hourly Rate</TableCell>
-                <TableCell align="center">Applied</TableCell>
-                {/* <TableCell align="center">SSN</TableCell> */}
-                <TableCell align="right">Action</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {shiftList
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((subscriber, index) => (
-                  <TableRow key={index}>
-                    <TableCell align="left">{subscriber?.hospitalName ? subscriber.hospitalName : "NA"}</TableCell>
-                    <TableCell align="center">{subscriber?.jobTitle ? subscriber.jobTitle : "NA"}</TableCell>
-                    <TableCell align="center">{subscriber?.timing ? subscriber.timing : "NA"}</TableCell>
-                    <TableCell align="center">{subscriber?.hourlyRate ? subscriber.hourlyRate : "NA"}</TableCell>
-                    <TableCell align="center">
-                      {subscriber?.applied === true ? "true": "false"}
-                    </TableCell>
-                    {/* <TableCell align="center">{subscriber?.ssn ? subscriber.ssn : null}</TableCell> */}
-                    <TableCell align="right">
-                      <IconButton>
-                        <Icon color="error">close</Icon>
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-          </StyledTable>
-
-          <TablePagination
-            sx={{ px: 2 }}
-            page={page}
-            component="div"
-            rowsPerPage={rowsPerPage}
-            count={shiftList.length}
-            onPageChange={handleChangePage}
-            rowsPerPageOptions={[5, 10, 25]}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-            nextIconButtonProps={{ 'aria-label': 'Next Page' }}
-            backIconButtonProps={{ 'aria-label': 'Previous Page' }}
-          />
+          /> */}
         </Box>
       </SimpleCard>
     </Container>

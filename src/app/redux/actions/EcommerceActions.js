@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export const GET_PRODUCT_LIST = 'GET_PRODUCT_LIST';
 export const GET_CART_LIST = 'GET_CART_LIST';
@@ -12,6 +13,7 @@ export const DELETE_PRODUCT_FROM_CART = 'DELETE_PRODUCT_FROM_CART';
 export const UPDATE_CART_AMOUNT = 'UPDATE_CART_AMOUNT';
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const GET_ALL_SHIFTS = 'GET_ALL_SHIFTS';
+export const POST_SHIFTS = 'POST_SHIFTS';
 
 export const getProductList = () => (dispatch) => {
   axios.get('/api/ecommerce/get-product-list').then((res) => {
@@ -108,11 +110,40 @@ export const getShifts = () => (dispatch) => {
     };
 
     axios.get('http://server.appsstaging.com:3055/api/getShifts', config).then((res) => {
-      // console.log('sss', res.data.allshifts);
+      // console.log('sss', res.data.shifts);
+
+      const shift = res.data.shifts;
       dispatch({
         type: GET_ALL_SHIFTS,
-        payload: res.data.allshifts,
+        payload: shift,
       });
     });
+  }
+};
+
+export const addShift = (state) => async (dispatch) => {
+  // console.log(uid, productId, amount);
+
+  const accessToken = window.localStorage.getItem('accessToken');
+  if (accessToken) {
+    const config = {
+      headers: { Authorization: 'Bearer ' + accessToken },
+    };
+
+    await axios
+      .post('http://server.appsstaging.com:3055/api/addShift', state, config)
+      .then((res) => {
+        console.log('ressssssssssssss', res);
+        toast.success(res.data.message);
+        // console.log('sss', res.data.allshifts);
+        dispatch({
+          type: 'MESSAGE',
+          payload: res.data.message,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        toast.error(err.response.data.message);
+      });
   }
 };
